@@ -2,21 +2,27 @@
 # -*- coding: utf-8 -*-
 from tkinter import *
 root = Tk()
-root.title('陈港平的专属画板')
-w = Canvas(root, width=1000, height=500, background='white')
-w.pack()
+root.title('画板')
 Label(root, text='画笔粗细:').pack()
 r = StringVar()
 r.set('1')
 size = Spinbox(root, textvariable=r, value=('2', '5', '10', '15', '20'))
 size.pack()
+c = StringVar()
+c.set('red')
+Label(root, text='画笔颜色:').pack()
+color = OptionMenu(root, c, 'red', 'black', 'blue', 'yellow', 'green')
+color.pack()
+w = Canvas(root, width=1000, height=500, background='white')
+w.pack()
+
 
 
 def paint(event):
     r = int(size.get())
     x1, y1 = (event.x-r), (event.y-r)
     x2, y2 = (event.x+r), (event.y+r)
-    w.create_oval(x1, y1, x2, y2, outline='red', fill='red')
+    w.create_oval(x1, y1, x2, y2, outline=c.get(), fill=c.get())
 
 
 def clear():
